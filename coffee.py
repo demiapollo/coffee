@@ -40,6 +40,7 @@ def check_resources(menu_item, resource_type):
             print(f"Sorry there is not enough {resource_type}")
             return False
         
+
 # return remaining value of resource after processing an order
 def remaining_resources(menu_item, resource_type):
     """Updating to reflect remaining resources after processing an order"""
@@ -71,29 +72,30 @@ while keep_working:
         print(f"Money: ${money}")
 
     # Check if resources are sufficient after the user chooses a drink
-    if check_resources(prompt, resource_type="water") == False:
-        keep_working = False
-        break
+    else: 
+        if check_resources(prompt, resource_type="water") == False:
+            keep_working = False
+            break        
    
-    # Process coins
-    # calculate the monetary value of coins inserted
-    quarters_inserted = int(input("How many quarters you inserted?: "))
-    dimes_inserted = int(input("How many dimes you inserted?: "))  
-    nickels_inserted = int(input("How many nickels you inserted?: "))
-    pennies_inserted = int(input("How many pennies you inserted? "))     
+        # Process coins
+        # calculate the monetary value of coins inserted
+        quarters_inserted = int(input("How many quarters you inserted?: "))
+        dimes_inserted = int(input("How many dimes you inserted?: "))  
+        nickels_inserted = int(input("How many nickels you inserted?: "))
+        pennies_inserted = int(input("How many pennies you inserted? "))     
 
-    total_value_inserted = (quarters_inserted * 0.25) + (dimes_inserted * 0.10) + (nickels_inserted * 0.05) + (pennies_inserted * 0.01)
-    
-    # Check if the transaction is successful
-    if total_value_inserted < MENU[prompt]["cost"]:
-        print("Sorry that's not enough money. Money refunded.")
-    elif total_value_inserted > MENU[prompt]["cost"]:
-        change_returned = total_value_inserted - MENU[prompt]["cost"]
-        change_returned = round(change_returned, 2)
-        print(f"Here is ${change_returned} dollars in change.")
-        money += (MENU[prompt]["cost"])
-        # return remaining value of resource after processing an order
-        remaining_resources(prompt, resource_type="water")
-        print(f"Money: ${money}")
-        print(f"Here is your {prompt}. Enjoy!")
+        total_value_inserted = (quarters_inserted * 0.25) + (dimes_inserted * 0.10) + (nickels_inserted * 0.05) + (pennies_inserted * 0.01)
+        
+        # Check if the transaction is successful
+        if total_value_inserted < MENU[prompt]["cost"]:
+            print("Sorry that's not enough money. Money refunded.")
+        elif total_value_inserted > MENU[prompt]["cost"]:
+            change_returned = total_value_inserted - MENU[prompt]["cost"]
+            change_returned = round(change_returned, 2)
+            print(f"Here is ${change_returned} dollars in change.")
+            money += (MENU[prompt]["cost"])
+            # return remaining value of resource after processing an order
+            remaining_resources(prompt, resource_type="water")
+            print(f"Money: ${money}")
+            print(f"Here is your {prompt}. Enjoy!")
 
